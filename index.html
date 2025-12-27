@@ -95,60 +95,46 @@
 </head>
 <body>
     <h1>Venom Fonts</h1>
-    <p>دخل الكلمة اللي عايز تشوف أشكالها الفانسي:</p>
-    <input type="text" id="input" placeholder="اكتب هنا...">
+    <p>دخل الكلمة اللي عايز تشوف أشكالها الفانسي (يفضل إنجليزي):</p>
+    <input type="text" id="input" placeholder="اكتب هنا... مثل Venom">
     <div class="container" id="outputs"></div>
 
     <script>
-        // 10 أشكال مختلفة تماماً (مضمونة 100%)
-        const fontStyles = [
-            "𝗕𝗼𝗹𝗱 𝗦𝗮𝗻𝘀",          // Bold Sans
-            "𝘽𝙤𝙡𝙙 𝙎𝙚𝙧𝙞𝙛",          // Bold Serif
-            "𝐁𝐨𝐥𝐝 𝐌𝐚𝐭𝐡",          // Mathematical Bold
-            "𝒃𝒐𝒍𝒅 𝒊𝒕𝒂𝒍𝒊𝒄 𝒔𝒆𝒓𝒊𝒇", // Bold Italic Serif
-            "𝓑𝓸𝓵𝓭 𝓢𝓬𝓻𝓲𝓹𝓽",       // Bold Script
-            "𝔹𝕠𝕝𝕕 𝔽𝕣𝕒𝕜𝕥𝕦𝕣",     // Bold Fraktur
-            "𝙱𝚘𝚕𝚍 𝙼𝚘𝚗𝚘𝚜𝚙𝚊𝚌𝚎",    // Bold Monospace
-            "🅑🅞🅛🅓 🅢🅠🅤🅐🅡🅔🅓",      // Squared
-            "Ⓑⓞⓛⓓ Ⓒⓘⓡⓒⓛⓔⓓ",      // Circled
-            "ʙᴏʟᴅ sᴍᴀʟʟ ᴄᴀᴘs"     // Small Caps
-        ];
-
-        const fontMaps = [
-            // 1. Bold Sans
-            str => str.replace(/[A-Za-z]/g, c => String.fromCharCode(c.charCodeAt(0) + (c <= 'Z' ? 120205 : 120211))),
-            // 2. Bold Serif
-            str => str.replace(/[A-Za-z]/g, c => String.fromCharCode(c.charCodeAt(0) + (c <= 'Z' ? 120211 : 120217))),
-            // 3. Mathematical Bold
-            str => str.replace(/[A-Za-z]/g, c => String.fromCharCode(c.charCodeAt(0) + (c <= 'Z' ? 119808 : 119860))),
-            // 4. Bold Italic Serif
-            str => str.replace(/[A-Za-z]/g, c => String.fromCharCode(c.charCodeAt(0) + (c <= 'Z' ? 120276 : 120302))),
-            // 5. Bold Script
-            str => str.replace(/[A-Za-z]/g, c => String.fromCharCode(c.charCodeAt(0) + (c <= 'Z' ? 120302 : 120328))),
-            // 6. Bold Fraktur
-            str => str.replace(/[A-Za-z]/g, c => String.fromCharCode(c.charCodeAt(0) + (c <= 'Z' ? 120328 : 120354))),
-            // 7. Bold Monospace
-            str => str.replace(/[A-Za-z]/g, c => String.fromCharCode(c.charCodeAt(0) + (c <= 'Z' ? 120257 : 120263))),
-            // 8. Squared (كبير فقط، صغير مش متوفر)
-            str => str.replace(/[A-Z]/g, c => '🅰🅱🅲🅳🅴🅵🅶🅷🅸🅹🅺🅻🅼🅽🅾🅿🆀🆁🆂🆃🆄🆅🆆🆇🆈🆉'[c.charCodeAt(0)-65] || c)
-                   .replace(/[a-z]/g, c => c.toUpperCase()), // الصغيرة نحولها كبيرة
-            // 9. Circled
-            str => str.replace(/[A-Za-z]/g, c => (c <= 'Z' ? 'ⒶⒷⒸⒹⒺⒻⒼⒽⒾⒿⓀⓁⓂⓃⓄⓅⓆⓇⓈⓉⓊⓋⓌⓍⓎⓏ' : 'ⓐⓑⓒⓓⓔⓕⓖⓗⓘⓙⓚⓛⓜⓝⓞⓟⓠⓡⓢⓣⓤⓥⓦⓧⓨⓩ')[c <= 'Z' ? c.charCodeAt(0)-65 : c.charCodeAt(0)-97]),
-            // 10. Small Caps (صغير فقط للحروف الصغيرة، الكبيرة تبقى عادي)
-            str => str.replace(/[a-z]/g, c => 'ᴀʙᴄᴅᴇꜰɢʜɪᴊᴋʟᴍɴᴏᴘQʀꜱᴛᴜᴠᴡxʏᴢ'[c.charCodeAt(0)-97])
+        const styles = [
+            // 1. Bold Serif 𝐀 𝐚
+            text => text.replace(/[A-Za-z]/g, c => String.fromCharCode(c.charCodeAt(0) + (c <= 'Z' ? 120211 - 65 : 120217 - 97))),
+            // 2. Sans Bold 𝗔 𝗮
+            text => text.replace(/[A-Za-z]/g, c => String.fromCharCode(c.charCodeAt(0) + (c <= 'Z' ? 120205 - 65 : 120211 - 97))),
+            // 3. Bold Italic 𝑨 𝒂
+            text => text.replace(/[A-Za-z]/g, c => String.fromCharCode(c.charCodeAt(0) + (c <= 'Z' ? 120276 - 65 : 120302 - 97))),
+            // 4. Bold Script 𝓐 𝓪
+            text => text.replace(/[A-Za-z]/g, c => String.fromCharCode(c.charCodeAt(0) + (c <= 'Z' ? 120302 - 65 : 120328 - 97))),
+            // 5. Bold Fraktur 𝕬 𝕒
+            text => text.replace(/[A-Za-z]/g, c => String.fromCharCode(c.charCodeAt(0) + (c <= 'Z' ? 120328 - 65 : 120354 - 97))),
+            // 6. Double Struck 𝔸 𝕒
+            text => text.replace(/[A-Za-z]/g, c => String.fromCharCode(c.charCodeAt(0) + (c <= 'Z' ? 120120 - 65 : 120146 - 97))),
+            // 7. Monospace 𝙰 𝚊
+            text => text.replace(/[A-Za-z]/g, c => String.fromCharCode(c.charCodeAt(0) + (c <= 'Z' ? 120263 - 65 : 120289 - 97))),
+            // 8. Circled Ⓐ ⓐ
+            text => text.replace(/[A-Za-z]/g, c => String.fromCharCode(c <= 'Z' ? 9398 + (c.charCodeAt(0) - 65) : 9424 + (c.charCodeAt(0) - 97))),
+            // 9. Squared 🄰 (upper only, lower to upper)
+            text => text.replace(/[A-Z]/g, c => '🄰🄱🄲🄳🄴🄵🄶🄷🄸🄹🄺🄻🄼🄽🄾🄿🅀🅁🅂🅃🅄🅅🅆🅇🅈🅉'[c.charCodeAt(0)-65] || c)
+                    .replace(/[a-z]/g, c => '🄰🄱🄲🄳🄴🄵🄶🄷🄸🄹🄺🄻🄼🄽🄾🄿🅀🅁🅂🅃🅄🅅🅆🅇🅈🅉'[c.charCodeAt(0)-65]),
+            // 10. Small Caps ᴀ ʙ ᴄ (lower only, upper normal)
+            text => text.replace(/[a-z]/g, c => 'ᴀʙᴄᴅᴇꜰɢʜɪᴊᴋʟᴍɴᴏᴘQʀꜱᴛᴜᴠᴡxʏᴢ'[c.charCodeAt(0)-97])
         ];
 
         const input = document.getElementById('input');
         const outputs = document.getElementById('outputs');
 
         input.addEventListener('input', generateStyles);
-        generateStyles(); // مثال افتراضي
+        generateStyles(); // مثال "Venom"
 
         function generateStyles() {
             const text = input.value || "Venom";
             outputs.innerHTML = '';
-            fontStyles.forEach((name, index) => {
-                const styledText = fontMaps[index](text);
+            styles.forEach((map, index) => {
+                let styledText = map(text);
                 const div = document.createElement('div');
                 div.className = 'style';
                 div.innerHTML = `
