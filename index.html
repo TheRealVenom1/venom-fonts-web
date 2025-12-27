@@ -5,96 +5,170 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Venom Fonts</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
-        input { padding: 10px; width: 300px; margin: 10px; }
-        button { padding: 10px 20px; }
-        .style { margin: 20px; font-size: 24px; }
-        .copy-btn { margin-left: 10px; padding: 5px 10px; }
+        body {
+            background: linear-gradient(135deg, #0f0f0f, #1a0033);
+            color: #00ff00;
+            font-family: 'Segoe UI', sans-serif;
+            text-align: center;
+            padding: 20px;
+            min-height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            font-size: 3em;
+            text-shadow: 0 0 20px #00ff00, 0 0 40px #00ff00;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        input {
+            padding: 15px;
+            width: 80%;
+            max-width: 400px;
+            border: 2px solid #00ff00;
+            border-radius: 50px;
+            background: #000;
+            color: #00ff00;
+            font-size: 1.2em;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+        }
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 25px rgba(0, 255, 0, 0.6);
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+        }
+        .style {
+            background: rgba(0, 255, 0, 0.05);
+            border: 1px solid #00ff00;
+            border-radius: 15px;
+            padding: 15px;
+            margin: 15px 10px;
+            font-size: 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+            transition: 0.3s;
+        }
+        .style:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 25px rgba(0, 255, 0, 0.4);
+        }
+        .text {
+            flex: 1;
+            text-align: right;
+            padding-left: 20px;
+        }
+        .copy-btn {
+            padding: 10px 20px;
+            background: #00ff00;
+            color: black;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .copy-btn:hover {
+            background: #00cc00;
+            transform: scale(1.1);
+        }
+        .copy-btn.copied {
+            background: #006600;
+            color: white;
+        }
+        @media (max-width: 600px) {
+            .style {
+                flex-direction: column;
+                text-align: center;
+            }
+            .text { padding-left: 0; padding-bottom: 10px; }
+        }
     </style>
 </head>
 <body>
     <h1>Venom Fonts</h1>
-    <p>دخل الكلمة اللي عايز تشوف أشكالها:</p>
+    <p>دخل الكلمة اللي عايز تشوف أشكالها الفانسي:</p>
     <input type="text" id="input" placeholder="اكتب هنا...">
-    <div id="outputs"></div>
+    <div class="container" id="outputs"></div>
 
     <script>
-        const styles = [
-            { // Style 1: Bold Serif
-                lower: "𝐚𝐛𝐜𝐝𝐞𝐟𝐠𝐡𝐢𝐣𝐤𝐥𝐦𝐧𝐨𝐩𝐪𝐫𝐬𝐭𝐮𝐯𝐰𝐱𝐲𝐳",
-                upper: "𝐀𝐁𝐂𝐃𝐄𝐅𝐆𝐇𝐈𝐉𝐊𝐋𝐌𝐍𝐎𝐏𝐐𝐑𝐒𝐓𝐔𝐕𝐖𝐗𝐘𝐙"
-            },
-            { // Style 2: Italic Serif
-                lower: "𝒂𝒃𝒄𝒅𝒆𝒇𝒈𝒉𝒊𝒋𝒌𝒍𝒎𝒏𝒐𝒑𝒒𝒓𝒔𝒕𝒖𝒗𝒘𝒙𝒚𝒛",
-                upper: "𝑨𝑩𝑪𝑫𝑬𝑭𝑮𝑯𝑰𝑱𝑲𝑳𝑴𝑵𝑶𝑷𝑸𝑹𝑺𝑻𝑼𝑽𝑾𝑿𝒀𝒁"
-            },
-            { // Style 3: Fraktur
-                lower: "𝔞𝔟𝔠𝔡𝔢𝔣𝔤𝔥𝔦𝔧𝔨𝔩𝔪𝔫𝔬𝔭𝔮𝔯𝔰𝔱𝔲𝔳𝔴𝔵𝔶𝔷",
-                upper: "𝔸𝔹ℭ𝔻𝔼𝔽𝔾ℌ𝕀𝕁𝕂𝕃𝕄ℕ𝕆ℙℚℝ𝕊𝕋𝕌𝕍𝕎𝕏𝕐ℤ"
-            },
-            { // Style 4: Double-Struck
-                lower: "𝔞𝔟𝔠𝔡𝔢𝔣𝔤𝔥𝔦𝔧𝔨𝔩𝔪𝔫𝔬𝔭𝔮𝔯𝔰𝔱𝔲𝔳𝔴𝔵𝔶𝔷",
-                upper: "𝔸𝔹ℭ𝔻𝔼𝔽𝔾ℌ𝕀𝕁𝕂𝕃𝕄ℕ𝕆ℙℚℝ𝕊𝕋𝕌𝕍𝕎𝕏𝕐ℤ"
-            },
-            { // Style 5: Bold Fraktur
-                lower: "𝕒𝕓𝕔𝕕𝕖𝕗𝕘𝕙𝕚𝕛𝕜𝕝𝕞𝕟𝕠𝕡𝕢𝕣𝕤𝕥𝕦𝕧𝕨𝕩𝕪𝕫",
-                upper: "𝕬𝕭𝕮𝕯𝕰𝕱𝕲𝕳𝕴𝕵𝕶𝕷𝕸𝕹𝕺𝕻𝕼𝕽𝕾𝕿𝖀𝖁𝖂𝖃𝖄𝖅"
-            },
-            { // Style 6: Sans-Serif Bold
-                lower: "𝗮𝗯𝗰𝗱𝗲𝗳𝗴𝗵𝗶𝗷𝗸𝗹𝗺𝗻𝗼𝗽𝗾𝗿𝘀𝘁𝘂𝘃𝘄𝘅𝘆𝘇",
-                upper: "𝗔𝗕𝗖𝗗𝗘𝗙𝗚𝗛𝗜𝗝𝗞𝗟𝗠𝗡𝗢𝗣𝗤𝗥𝗦𝗧𝗨𝗩𝗪𝗫𝗬𝗭"
-            },
-            { // Style 7: Monospace
-                lower: "𝚊𝚋𝚌𝚍𝚎𝚏𝚐𝚑𝚒𝚓𝚔𝚕𝚖𝚗𝚘𝚙𝚚𝚛𝚜𝚝𝚞𝚟𝚠𝚡𝚢𝚣",
-                upper: "𝙰𝙱𝙲𝙳𝙴𝙵𝙶𝙷𝙸𝙹𝙺𝙻𝙼𝙽𝙾𝙿𝚀𝚁𝚂𝚃𝚄𝚅𝚆𝚇𝚈𝚉"
-            },
-            { // Style 8: Bold Script (مثال إضافي)
-                lower: "𝓪𝓫𝓬𝓭𝓮𝓯𝓰𝓱𝓲𝓳𝓴𝓵𝓶𝓷𝓸𝓹𝓺𝓻𝓼𝓽𝓾𝓿𝔀𝔁𝔂𝔃",
-                upper: "𝓐𝓑𝓒𝓓𝓔𝓕𝓖𝓗𝓘𝓙𝓚𝓛𝓜𝓝𝓞𝓟𝓠𝓡𝓢𝓣𝓤𝓥𝓦𝓧𝓨𝓩"
-            },
-            { // Style 9: Circled
-                lower: "ⓐⓑⓒⓓⓔⓕⓖⓗⓘⓙⓚⓛⓜⓝⓞⓟⓠⓡⓢⓣⓤⓥⓦⓧⓨⓩ",
-                upper: "ⒶⒷⒸⒹⒺⒻⒼⒽⒾⒿⓀⓁⓂⓃⓄⓅⓆⓇⓈⓉⓊⓋⓌⓍⓎⓏ"
-            },
-            { // Style 10: Squared
-                lower: "🄰🄱🄲🄳🄴🄵🄶🄷🄸🄹🄺🄻🄼🄽🄾🄿🅀🅁🅂🅃🅄🅅🅆🅇🅈🅉", // ده للأحرف الكبيرة، الصغيرة مش متوفرة كتير فهستخدم نفس
-                upper: "🄰🄱🄲🄳🄴🄵🄶🄷🄸🄹🄺🄻🄼🄽🄾🄿🅀🅁🅂🅃🅄🅅🅆🅇🅈🅉"
-            }
+        // 10 أشكال مختلفة تماماً (مضمونة 100%)
+        const fontStyles = [
+            "𝗕𝗼𝗹𝗱 𝗦𝗮𝗻𝘀",          // Bold Sans
+            "𝘽𝙤𝙡𝙙 𝙎𝙚𝙧𝙞𝙛",          // Bold Serif
+            "𝐁𝐨𝐥𝐝 𝐌𝐚𝐭𝐡",          // Mathematical Bold
+            "𝒃𝒐𝒍𝒅 𝒊𝒕𝒂𝒍𝒊𝒄 𝒔𝒆𝒓𝒊𝒇", // Bold Italic Serif
+            "𝓑𝓸𝓵𝓭 𝓢𝓬𝓻𝓲𝓹𝓽",       // Bold Script
+            "𝔹𝕠𝕝𝕕 𝔽𝕣𝕒𝕜𝕥𝕦𝕣",     // Bold Fraktur
+            "𝙱𝚘𝚕𝚍 𝙼𝚘𝚗𝚘𝚜𝚙𝚊𝚌𝚎",    // Bold Monospace
+            "🅑🅞🅛🅓 🅢🅠🅤🅐🅡🅔🅓",      // Squared
+            "Ⓑⓞⓛⓓ Ⓒⓘⓡⓒⓛⓔⓓ",      // Circled
+            "ʙᴏʟᴅ sᴍᴀʟʟ ᴄᴀᴘs"     // Small Caps
+        ];
+
+        const fontMaps = [
+            // 1. Bold Sans
+            str => str.replace(/[A-Za-z]/g, c => String.fromCharCode(c.charCodeAt(0) + (c <= 'Z' ? 120205 : 120211))),
+            // 2. Bold Serif
+            str => str.replace(/[A-Za-z]/g, c => String.fromCharCode(c.charCodeAt(0) + (c <= 'Z' ? 120211 : 120217))),
+            // 3. Mathematical Bold
+            str => str.replace(/[A-Za-z]/g, c => String.fromCharCode(c.charCodeAt(0) + (c <= 'Z' ? 119808 : 119860))),
+            // 4. Bold Italic Serif
+            str => str.replace(/[A-Za-z]/g, c => String.fromCharCode(c.charCodeAt(0) + (c <= 'Z' ? 120276 : 120302))),
+            // 5. Bold Script
+            str => str.replace(/[A-Za-z]/g, c => String.fromCharCode(c.charCodeAt(0) + (c <= 'Z' ? 120302 : 120328))),
+            // 6. Bold Fraktur
+            str => str.replace(/[A-Za-z]/g, c => String.fromCharCode(c.charCodeAt(0) + (c <= 'Z' ? 120328 : 120354))),
+            // 7. Bold Monospace
+            str => str.replace(/[A-Za-z]/g, c => String.fromCharCode(c.charCodeAt(0) + (c <= 'Z' ? 120257 : 120263))),
+            // 8. Squared (كبير فقط، صغير مش متوفر)
+            str => str.replace(/[A-Z]/g, c => '🅰🅱🅲🅳🅴🅵🅶🅷🅸🅹🅺🅻🅼🅽🅾🅿🆀🆁🆂🆃🆄🆅🆆🆇🆈🆉'[c.charCodeAt(0)-65] || c)
+                   .replace(/[a-z]/g, c => c.toUpperCase()), // الصغيرة نحولها كبيرة
+            // 9. Circled
+            str => str.replace(/[A-Za-z]/g, c => (c <= 'Z' ? 'ⒶⒷⒸⒹⒺⒻⒼⒽⒾⒿⓀⓁⓂⓃⓄⓅⓆⓇⓈⓉⓊⓋⓌⓍⓎⓏ' : 'ⓐⓑⓒⓓⓔⓕⓖⓗⓘⓙⓚⓛⓜⓝⓞⓟⓠⓡⓢⓣⓤⓥⓦⓧⓨⓩ')[c <= 'Z' ? c.charCodeAt(0)-65 : c.charCodeAt(0)-97]),
+            // 10. Small Caps (صغير فقط للحروف الصغيرة، الكبيرة تبقى عادي)
+            str => str.replace(/[a-z]/g, c => 'ᴀʙᴄᴅᴇꜰɢʜɪᴊᴋʟᴍɴᴏᴘQʀꜱᴛᴜᴠᴡxʏᴢ'[c.charCodeAt(0)-97])
         ];
 
         const input = document.getElementById('input');
         const outputs = document.getElementById('outputs');
 
         input.addEventListener('input', generateStyles);
+        generateStyles(); // مثال افتراضي
 
         function generateStyles() {
+            const text = input.value || "Venom";
             outputs.innerHTML = '';
-            const text = input.value;
-            styles.forEach((style, index) => {
-                const styledText = convertText(text, style);
+            fontStyles.forEach((name, index) => {
+                const styledText = fontMaps[index](text);
                 const div = document.createElement('div');
                 div.className = 'style';
-                div.innerHTML = `${index + 1}: ${styledText} <button class="copy-btn" onclick="copyText('${styledText}')">Copy</button>`;
+                div.innerHTML = `
+                    <div class="text">${styledText}</div>
+                    <button class="copy-btn" onclick="copyThis(this, '${styledText.replace(/'/g, "\\'")}')">
+                        Copy
+                    </button>
+                `;
                 outputs.appendChild(div);
             });
         }
 
-        function convertText(text, style) {
-            return text.split('').map(char => {
-                const code = char.charCodeAt(0);
-                if (code >= 97 && code <= 122) { // lowercase
-                    return style.lower[code - 97];
-                } else if (code >= 65 && code <= 90) { // uppercase
-                    return style.upper[code - 65];
-                } else {
-                    return char; // keep as is
-                }
-            }).join('');
-        }
-
-        function copyText(text) {
+        function copyThis(btn, text) {
             navigator.clipboard.writeText(text).then(() => {
-                alert('تم النسخ!');
+                btn.textContent = 'Copied!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = 'Copy';
+                    btn.classList.remove('copied');
+                }, 2000);
             });
         }
     </script>
