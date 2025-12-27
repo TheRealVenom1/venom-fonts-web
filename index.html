@@ -95,46 +95,79 @@
 </head>
 <body>
     <h1>Venom Fonts</h1>
-    <p>دخل الكلمة اللي عايز تشوف أشكالها الفانسي (يفضل إنجليزي):</p>
+    <p>دخل الكلمة اللي عايز تشوف أشكالها الفانسي (أفضل إنجليزي):</p>
     <input type="text" id="input" placeholder="اكتب هنا... مثل Venom">
     <div class="container" id="outputs"></div>
 
     <script>
         const styles = [
-            // 1. Bold Serif 𝐀 𝐚
-            text => text.replace(/[A-Za-z]/g, c => String.fromCharCode(c.charCodeAt(0) + (c <= 'Z' ? 120211 - 65 : 120217 - 97))),
-            // 2. Sans Bold 𝗔 𝗮
-            text => text.replace(/[A-Za-z]/g, c => String.fromCharCode(c.charCodeAt(0) + (c <= 'Z' ? 120205 - 65 : 120211 - 97))),
-            // 3. Bold Italic 𝑨 𝒂
-            text => text.replace(/[A-Za-z]/g, c => String.fromCharCode(c.charCodeAt(0) + (c <= 'Z' ? 120276 - 65 : 120302 - 97))),
-            // 4. Bold Script 𝓐 𝓪
-            text => text.replace(/[A-Za-z]/g, c => String.fromCharCode(c.charCodeAt(0) + (c <= 'Z' ? 120302 - 65 : 120328 - 97))),
-            // 5. Bold Fraktur 𝕬 𝕒
-            text => text.replace(/[A-Za-z]/g, c => String.fromCharCode(c.charCodeAt(0) + (c <= 'Z' ? 120328 - 65 : 120354 - 97))),
-            // 6. Double Struck 𝔸 𝕒
-            text => text.replace(/[A-Za-z]/g, c => String.fromCharCode(c.charCodeAt(0) + (c <= 'Z' ? 120120 - 65 : 120146 - 97))),
-            // 7. Monospace 𝙰 𝚊
-            text => text.replace(/[A-Za-z]/g, c => String.fromCharCode(c.charCodeAt(0) + (c <= 'Z' ? 120263 - 65 : 120289 - 97))),
-            // 8. Circled Ⓐ ⓐ
-            text => text.replace(/[A-Za-z]/g, c => String.fromCharCode(c <= 'Z' ? 9398 + (c.charCodeAt(0) - 65) : 9424 + (c.charCodeAt(0) - 97))),
-            // 9. Squared 🄰 (upper only, lower to upper)
-            text => text.replace(/[A-Z]/g, c => '🄰🄱🄲🄳🄴🄵🄶🄷🄸🄹🄺🄻🄼🄽🄾🄿🅀🅁🅂🅃🅄🅅🅆🅇🅈🅉'[c.charCodeAt(0)-65] || c)
-                    .replace(/[a-z]/g, c => '🄰🄱🄲🄳🄴🄵🄶🄷🄸🄹🄺🄻🄼🄽🄾🄿🅀🅁🅂🅃🅄🅅🅆🅇🅈🅉'[c.charCodeAt(0)-65]),
-            // 10. Small Caps ᴀ ʙ ᴄ (lower only, upper normal)
-            text => text.replace(/[a-z]/g, c => 'ᴀʙᴄᴅᴇꜰɢʜɪᴊᴋʟᴍɴᴏᴘQʀꜱᴛᴜᴠᴡxʏᴢ'[c.charCodeAt(0)-97])
+            // 1. Bold Serif
+            text => [...text].map(c => {
+                if (/[A-Z]/.test(c)) return String.fromCharCode(ord(c) + 120146);
+                if (/[a-z]/.test(c)) return String.fromCharCode(ord(c) + 120120);
+                return c;
+            }).join(''),
+            // 2. Sans Bold
+            text => [...text].map(c => {
+                if (/[A-Z]/.test(c)) return String.fromCharCode(ord(c) + 120140);
+                if (/[a-z]/.test(c)) return String.fromCharCode(ord(c) + 120114);
+                return c;
+            }).join(''),
+            // 3. Bold Italic
+            text => [...text].map(c => {
+                if (/[A-Z]/.test(c)) return String.fromCharCode(ord(c) + 120211);
+                if (/[a-z]/.test(c)) return String.fromCharCode(ord(c) + 120205);
+                return c;
+            }).join(''),
+            // 4. Bold Script
+            text => [...text].map(c => {
+                if (/[A-Z]/.test(c)) return String.fromCharCode(ord(c) + 120237);
+                if (/[a-z]/.test(c)) return String.fromCharCode(ord(c) + 120231);
+                return c;
+            }).join(''),
+            // 5. Bold Fraktur
+            text => [...text].map(c => {
+                if (/[A-Z]/.test(c)) return String.fromCharCode(ord(c) + 120263);
+                if (/[a-z]/.test(c)) return String.fromCharCode(ord(c) + 120257);
+                return c;
+            }).join(''),
+            // 6. Double Struck
+            text => [...text].map(c => {
+                if (/[A-Z]/.test(c)) return String.fromCharCode(ord(c) + 120055);
+                if (/[a-z]/.test(c)) return String.fromCharCode(ord(c) + 120049);
+                return c;
+            }).join(''),
+            // 7. Monospace
+            text => [...text].map(c => {
+                if (/[A-Z]/.test(c)) return String.fromCharCode(ord(c) + 120198);
+                if (/[a-z]/.test(c)) return String.fromCharCode(ord(c) + 120192);
+                return c;
+            }).join(''),
+            // 8. Circled
+            text => [...text].map(c => {
+                if (/[A-Z]/.test(c)) return String.fromCharCode(9398 + (ord(c) - 65));
+                if (/[a-z]/.test(c)) return String.fromCharCode(9424 + (ord(c) - 97));
+                return c;
+            }).join(''),
+            // 9. Squared
+            text => text.toUpperCase().replace(/[A-Z]/g, c => '🄰🄱🄲🄳🄴🄵🄶🄷🄸🄹🄺🄻🄼🄽🄾🄿🅀🅁🅂🅃🅄🅅🅆🅇🅈🅉'[ord(c)-65] || c),
+            // 10. Small Caps
+            text => [...text].map(c => /[a-z]/.test(c) ? 'ᴀʙᴄᴅᴇꜰɢʜɪᴊᴋʟᴍɴᴏᴘQʀꜱᴛᴜᴠᴡxʏᴢ'[ord(c)-97] : c).join('')
         ];
+
+        function ord(c) { return c.charCodeAt(0); }
 
         const input = document.getElementById('input');
         const outputs = document.getElementById('outputs');
 
         input.addEventListener('input', generateStyles);
-        generateStyles(); // مثال "Venom"
+        generateStyles();
 
         function generateStyles() {
             const text = input.value || "Venom";
             outputs.innerHTML = '';
             styles.forEach((map, index) => {
-                let styledText = map(text);
+                const styledText = map(text);
                 const div = document.createElement('div');
                 div.className = 'style';
                 div.innerHTML = `
